@@ -31,12 +31,13 @@ def index():
             filename = secure_filename(file.filename)
             filepath = os.path.join(app.config['UPLAOD_FOLDER'], filename)
             file.save(filepath)
-            out_path = get_times(filepath, app.config['DOWNLOAD_FOLDER'])
-            # out_path = os.path.join("\\", out_path)
 
-            # return redirect(url_for(out_path))
-            # return send_file(out_path, file)
-            return send_f
+            out_director = app.config['DOWNLOAD_FOLDER']
+            out_file = get_times(filepath, app.config['DOWNLOAD_FOLDER'])
+
+            # return send_file(out_path)
+            return send_from_directory(directory=out_director, filename=out_file, as_attachment=True)
+            # return send_f
 
     with open("index.html", encoding='utf8') as f:
         con = f.read()

@@ -36,10 +36,10 @@ def get_times(log_file, out_path):
     # print(group)
     names = [name for name in worktime]
     working = [worktime[person] for person in worktime]
-    out_filename = os.path.join(out_path, arrow.now(tz="Asia/Shanghai").format("YYYYMMDD-HHmmss"))
-    out_filename += ".xls"
-    pd.DataFrame(columns=["姓名", "在岗时间"], data={"姓名": names, "在岗时间": working}).to_excel("{}".format(out_filename))
-    return out_filename
+    filename = "在岗时间统计-{}.xls".format(arrow.now(tz="Asia/Shanghai").format("YYYYMMDD-HHmmss"))
+    abs_path = os.path.join(out_path, filename )
+    pd.DataFrame(columns=["姓名", "在岗时间"], data={"姓名": names, "在岗时间": working}).to_excel("{}".format(abs_path))
+    return filename
 
 if __name__ == "__main__":
     filename = 'data/visitors-stat-2018-10-9.csv'
