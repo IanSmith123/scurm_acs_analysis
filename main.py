@@ -1,0 +1,58 @@
+import os
+from flask import Flask, request, Response, flash, redirect, url_for, send_from_directory, send_file
+from werkzeug.utils import secure_filename
+
+from analysis import get_times
+
+ALLOWED_EXTENSIONS = ['csv']
+
+app = Flask(__name__)
+
+app.secret_key = "fjalkfjJKLFJKJAFu98"
+app.config['UPLAOD_FOLDER'] = "upload"
+app.config['DOWNLOAD_FOLDER'] = "download"
+
+
+def check_extension(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    if request.method=='POST':
+        if 'file' not in request.files:
+            flash("No file part")
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            flash("no selected file")
+            return redirect(request.url)
+
+        if file and check_extension(file.filename):
+            filename = secure_filename(file.filename)
+            filepath = os.path.join(app.config['UPLAOD_FOLDER'], filename)
+            file.save(filepath)
+            out_path = get_times(filepath, app.config['DOWNLOAD_FOLDER'])
+            # out_path = os.path.join("\\", out_path)
+
+            # return redirect(url_for(out_path))
+            # return send_file(out_path, file)
+            return send_f
+
+    with open("index.html", encoding='utf8') as f:
+        con = f.read()
+    return Response(con)
+
+
+@app.route("/upload")
+def get_upload_file():
+    return "success"
+
+
+@app.route("/out")
+def download():
+    return "download"
+
+
+if __name__ == "__main__":
+    # app.run(debug=False)
+    app.run(debug=True)
