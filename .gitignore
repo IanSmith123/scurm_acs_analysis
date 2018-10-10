@@ -2,3 +2,4 @@
 *.csv
 *.xls
 __pycache__
+*.un~
