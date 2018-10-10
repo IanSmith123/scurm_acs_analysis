@@ -1,7 +1,4 @@
 .idea
 *.csv
 *.xls
-download/
-out
-upload
 __pycache__
