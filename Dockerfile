@@ -1,5 +1,10 @@
-FROM python:3.7-alpine
+FROM tiangolo/uwsgi-nginx-flask:python3.6
 
+MAINTAINER scurss scurss@gmail.com
 WORKDIR /app
-COPY . /app
-RUN pip3 install -r /app/requirements.txt
+
+ADD . /app
+RUN pip install -r requirements.txt
+
+
+
