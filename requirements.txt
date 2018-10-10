@@ -1,3 +1,3 @@
-flask
-pandas
-arrow
+flask==1.0.2
+pandas==0.23.4
+arrow==0.12.1
