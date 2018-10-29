@@ -19,7 +19,8 @@ def get_times(log_file, out_path):
         return diff.seconds
 
     def get_timedelta(second):
-        return "{:.2f}小时| {:.2f}分钟 | {}秒".format(second/3600, second/60, second)
+        return "{:.2f}小时".format(second/3600)
+        #return "{:.2f}小时| {:.2f}分钟 | {}秒".format(second/3600, second/60, second)
 
     times["在岗秒数"] = times.apply(get_second, axis=1)
 
